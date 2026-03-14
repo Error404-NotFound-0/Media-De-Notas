@@ -1,34 +1,35 @@
 def main():
     while True:
-        permitido = True
         nota = []
         print('\n'*10, '-'*10, 'CALCULADOR DE MÉDIA', '-'*10)
         print('\n', '-'*50, '\n INSTRUÇÕES: \n\n INSIRA UMA NOTA POR VEZ; \n QUANDO TERMINAR, DIGITE: "FIM".\n', '-'*50)
-    
-        rodando = True
-        while rodando:
+        while True:
             entrada = input('\n Insira a nota, ou digite "FIM": ')
             entrada = entrada.replace(',', '.')
             try:
                 entrada = float(entrada)
                 nota.append(entrada)
             except:
-                if len(nota) == 0:
-                    rodando = False
-                    permitido = False
-                    
-                if entrada.lower() == 'fim' and permitido == True:
-                    media = (sum(nota))/len(nota)
-                    print(f'\n\n -- A média é: {media: .2f}\n\n')
-                    while rodando:
-                        e = input('Deseja fazer novamente? (S/N): ').strip().lower()
-                        if e in ['n', 's']:
-                            if e == 'n':
-                                quit()
-                            else:
-                                rodando = False
-                        else:
-                            print('Escolha inválida!')  
+                if entrada.lower() == 'fim':
+                    if nota:
+                        media = (sum(nota))/len(nota)
+                        print(f'\n\n -- A média é: {media: .2f}\n\n')
+                    recomecar()
+                    break
+
                 else:
                     print('Insira apena um número por vez, ou digite "FIM".')
+
+
+def recomecar():
+    while True:
+        e = input("\n Você deseja fazer novamente? (S/N)")
+        if e.lower() == 's':
+            break
+        if e.lower() == 'n':
+            print('\n Adeus, até a próxima!\n')
+            quit()
+        else:
+            print('Escolha inválida.')
+
 main()
